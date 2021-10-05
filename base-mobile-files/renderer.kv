@@ -1,0 +1,43 @@
+#:import listdir os.listdir
+
+<MainScreen>:
+    FloatLayout:
+        ModelRenderer:
+            id: renderer
+            model: 'models/%s' % model.text 
+#             slider: model_height
+            rotate_model: False
+        
+        GridLayout:
+            size_hint: 1, 0.05
+            cols: 3
+            
+            Spinner:
+                id: model
+                text: 'brenda_peq.obj'
+                values:
+                    sorted([x for x in listdir('models/')
+                    if x.lower().endswith(('.obj'))])
+            
+            ToggleButton:
+                id: rotate_model
+                text: 'Girar'
+                on_state: app.root.on_state(self) 
+                
+            Button:
+                id: reset_model
+                text: 'Frontal'
+                on_press: app.root.on_reset()
+        
+#         GridLayout:
+#             size_hint: None, 0.75
+#             pos_hint:{"top": .9, "right":1}
+#             rows: 2
+#         
+#             Slider:
+#                 id: model_height
+#                 orientation: 'vertical'
+#                  
+#             Label:
+#                 size_hint_y: .1
+#                 text: '%s' % model_height.value
